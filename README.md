@@ -6,6 +6,7 @@ Monitor mobility and pedestrian flow during corona lockdown policies.
 - Pedestrian flow data Zurich Hardbrücke station, "party barometer" https://data.stadt-zuerich.ch/dataset/vbz_frequenzen_hardbruecke
 - Covid19 Zürich data: https://raw.githubusercontent.com/openZH/covid_19/master/fallzahlen_kanton_alter_geschlecht_csv/COVID19_Fallzahlen_Kanton_ZH_alter_geschlecht.csv
 - Apple data on mobility https://www.apple.com/covid19/mobility
+- Apple and Google Mobility data scraper https://github.com/ActiveConclusion/COVID19_mobility
 
 
 Further:
