@@ -129,4 +129,5 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name):
         ]
     )
 
-    fig.show(config=config)
+    fig.show(config=config, )
+    #fig.write_html(f"images/plot_{y1_name}_vs_{y2_name}.html")
