@@ -50,13 +50,6 @@ def ckan_prep_plot_data(df, id_col, meter_name, datetime_col, resample_freq):
     return df
 
 
-
-def apple_mobility_data():
-    URL = "https://www.apple.com/covid19/mobility"
-    pass
-
-
-
 def cov_zh_get_data(url):
     """Wrapper function: Call get_raw_csv() and clean_cov_zh() functions
     to capture and clean the covid Zürich dataset. 

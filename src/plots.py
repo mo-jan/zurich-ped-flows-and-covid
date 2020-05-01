@@ -14,7 +14,20 @@ from plotly.subplots import make_subplots
 pio.templates.default = "plotly_white"
 
 
-def plotly_graph(df, x_cname, y_cnames, plot_name, plot_path):
+def plotly_graph(df, x_cname, y_cnames, file_name, plot_path):
+    """Stepped line chart for one or more lines
+
+    :param df: data for x-axis and all y-axis data in separate columns
+    :type df: pd.DataFrame
+    :param x_cname: name of column for x
+    :type x_cname: [type]
+    :param y_cnames: [description]
+    :type y_cnames: [type]
+    :param file_name: [description]
+    :type file_name: [type]
+    :param plot_path: path to directory for exporting html plot
+    :type plot_path: pathlib.Path object 
+    """
 
     x = df[x_cname]
 
@@ -39,23 +52,24 @@ def plotly_graph(df, x_cname, y_cnames, plot_name, plot_path):
     fig.show()
 
     (plot_path).mkdir(parents=True, exist_ok=True)
-    fig.write_html(str(plot_path / f"plot_{plot_name}.html"))
+    fig.write_html(str(plot_path / f"{file_name}.html"))
 
 
-def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
-    """Plot a stepped line chart from two time series with
-    dual y axes
+def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path): 
+    """Stepped line chart plot from two time series with
+    dual y-axes
 
-    :param df: dataframe containing columns for x and both y axes
+    :param df: dataframe containing columns for x and both y axes data
     :type df: pd.DataFrame
-    :param x_name: name of column in df, which contains x-axis data
+    :param x_name: name of df column with x-axis data
     :type x_name: string
-    :param y1_name: name of column in df, which contains first y-axis data
+    :param y1_name: name of df column with first y-axis data
     :type y1_name: string
-    :param y2_name: name of column in df, which contains second y-axis data
+    :param y2_name: name of df column with second y-axis data
     :type y2_name: string
+    :param plot_path: path to directory for exporting html plot
+    :type plot_path: pathlib.Path object 
     """
-
     # create traces
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     config = dict({"displayModeBar": False, "displaylogo": False,},)
@@ -141,32 +155,32 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
     fig.write_html(str(plot_path / f"plot_{y1_name}_vs_{y2_name}.html"))
 
 
-def multi_yaxis_plot(df1, x1, y1, df2, x2, y2, df3, x3, y3, pltname, filename, plot_path,):
+def multi_yaxis_plot(df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, plot_path,):
     """Stepped line chart plot with 3 y-axes.
 
-    :param df1: data for x + y of line 1
+    :param df1: data for line 1 x and y
     :type df1: pd.DataFrame
-    :param x1: column name in df1 for line 1 x-axis data
+    :param x1: name of df column with line 1 x-axis data
     :type x1: string
-    :param y1: column name in df1 for line 1 y-axis data
+    :param y1: name of df column with line 1 y-axis data
     :type y1: string
-    :param df2: data for x + y of line 2
+    :param df2: data for line 2 x and y
     :type df2: pd.DataFrame
-    :param x2: column name in df2 for line 2 x-axis data
+    :param x2: name of df column with line 2 x-axis data
     :type x2: string
-    :param y2: column name in df2 for line 2 y-axis data
+    :param y2: name of df column with line 2 y-axis data
     :type y2: string
-    :param df3: data for x + y of line 3
+    :param df3: data for line 3 x and y
     :type df3: pd.DataFrame
-    :param x3: column name in df2 for line 2 x-axis data
+    :param x3: name of df column with line 2 x-axis data
     :type x3: string
-    :param y3: column name in df2 for line 2 x-axis data
+    :param y3: name of df column with line 2 x-axis data
     :type y3: string
-    :param pltname: plot name i.e. plot title
-    :type pltname: string
-    :param filename: name of html file to be stored
+    :param plot_name: plot name i.e. plot title
+    :type plot_name: string
+    :param filename: html file name
     :type filename: string
-    :param plot_path: path to directory, in which plot will be stored
+    :param plot_path: path to directory for exporting html plot
     :type plot_path: pathlib.Path object
     """
 
@@ -293,7 +307,7 @@ def multi_yaxis_plot(df1, x1, y1, df2, x2, y2, df3, x3, y3, pltname, filename, p
     )
 
     fig.update_layout(
-        showlegend=False, xaxis_range=["2020-02-15", dt.datetime.now()], title=pltname,
+        showlegend=False, xaxis_range=["2020-02-15", dt.datetime.now()], title=plot_name,
     )
 
     fig.show(config=config,)
