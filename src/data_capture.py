@@ -37,12 +37,12 @@ def ckan_wrangle_records(data):
     df["Timestamp"] = pd.to_datetime(df["Timestamp"], infer_datetime_format=True)
     df.set_index("Timestamp", inplace=True, drop=False)
     df.In, df.Out = pd.to_numeric(df.In), pd.to_numeric(df.Out)
-    df["Total"] = df["In"] + df["Out"]
+    df["total_counts"] = df["In"] + df["Out"]
     return df
 
 
 def ckan_prep_plot_data(df, id_col, meter_name, datetime_col, resample_freq):
-    df = df.loc[df[id_col] == meter_name, ["In", "Out", "Total"]].sort_values(
+    df = df.loc[df[id_col] == meter_name, ["In", "Out", "total_counts"]].sort_values(
         datetime_col
     )
     df = df.resample(resample_freq).sum()
