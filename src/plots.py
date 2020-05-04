@@ -10,6 +10,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt
 
 pio.templates.default = "plotly_white"
 
@@ -55,7 +56,7 @@ def plotly_graph(df, x_cname, y_cnames, file_name, plot_path):
     fig.write_html(str(plot_path / f"{file_name}.html"))
 
 
-def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path): 
+def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
     """Stepped line chart plot from two time series with
     dual y-axes
 
@@ -155,7 +156,9 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
     fig.write_html(str(plot_path / f"plot_{y1_name}_vs_{y2_name}.html"))
 
 
-def multi_yaxis_plot(df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, plot_path,):
+def multi_yaxis_plot(
+    df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, plot_path,
+):
     """Stepped line chart plot with 3 y-axes.
 
     :param df1: data for line 1 x and y
@@ -183,7 +186,6 @@ def multi_yaxis_plot(df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename,
     :param plot_path: path to directory for exporting html plot
     :type plot_path: pathlib.Path object
     """
-
 
     # create traces
     fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -307,10 +309,32 @@ def multi_yaxis_plot(df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename,
     )
 
     fig.update_layout(
-        showlegend=False, xaxis_range=["2020-02-15", dt.datetime.now()], title=plot_name,
+        showlegend=False,
+        xaxis_range=["2020-02-15", dt.datetime.now()],
+        title=plot_name,
     )
 
     fig.show(config=config,)
 
     (plot_path).mkdir(parents=True, exist_ok=True)
     fig.write_html(str(plot_path / f"{filename}.html"))
+
+
+def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
+    
+    fig, ax1 = plt.subplots(figsize=(20, 8))
+
+    color = 'black'
+    ax1.set_xlabel("time")
+    ax1.set_ylabel(y1, color=color)
+    ax1.plot(df1[x1], df1[y1], color=color, drawstyle="steps")
+    ax1.tick_params(axis='y', labelcolor=color)
+
+    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+
+    color = 'red'
+    ax2.set_ylabel(y2, color=color)
+    ax2.plot(df2[x2], df2[y2], color=color, drawstyle="steps")
+    ax2.tick_params(labelcolor=color)
+    
+    plt.savefig(str(str(plot_path / f"{filename}.png")))
