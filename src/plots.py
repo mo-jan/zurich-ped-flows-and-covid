@@ -323,6 +323,7 @@ def multi_yaxis_plot(
     today = dt.date.today().strftime("%Y-%m-%d")
     fig.write_html(str(plot_path / f"{today}_{filename}.html"))
     fig.write_html(str(plot_path / f"{filename}.html"))
+    fig.write_image(str(plot_path / f"{filename}.png"))
 
 
 def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
