@@ -322,6 +322,7 @@ def multi_yaxis_plot(
     (save_path).mkdir(parents=True, exist_ok=True)
     today = dt.date.today().strftime("%Y-%m-%d")
     fig.write_html(str(save_path / f"{today}_{filename}.html"))
+    fig.write_html(str(save_path / f"{filename}.html"))
 
 
 def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, save_path):
@@ -365,3 +366,4 @@ def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, save_path):
     (save_path).mkdir(parents=True, exist_ok=True)
     today = dt.date.today().strftime("%Y-%m-%d")
     plt.savefig(str(str(save_path / f"{today}_{filename}.png")))
+    plt.savefig(str(str(save_path / f"{filename}.png")))
