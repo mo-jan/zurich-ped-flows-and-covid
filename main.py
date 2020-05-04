@@ -27,7 +27,7 @@ pio.templates.default = "plotly_white"
 def main():
     # variables
     plot_path = Path("plots/")
-    data_path = Path("data/processed/")
+    data_path = Path("data_cron/")
 
     # DATA A) covid zürich data
     url_cov_zh = "https://raw.githubusercontent.com/openZH/covid_19/master/fallzahlen_kanton_alter_geschlecht_csv/COVID19_Fallzahlen_Kanton_ZH_alter_geschlecht.csv"
