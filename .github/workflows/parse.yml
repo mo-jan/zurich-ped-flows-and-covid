@@ -3,7 +3,7 @@ name: run updater
 on:
   push:
   schedule:
-    - cron: 10 19 * * * # See https://crontab.guru/#0_8_*_*_*
+    - cron: 0 19 * * 1,4,6 # See https://crontab.guru/#0_8_*_*_*
 
 jobs:
   build:
