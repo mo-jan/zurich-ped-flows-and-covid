@@ -6,7 +6,8 @@
 
 We assume Hardbrücke's northeastern exit is a suitable "barometer" for Zürich's level of party activities. We also assume death figures are the most reliable indicators for Covid-19 (though with 3-4 week delay).
 
-Simple static plot:
+Here is a very simple static plot.
+
 ![Graph](/plots/zh_covid19_mobility_static.png)
 
-Interactive html graph available for download <a id="raw-url" href="https://github.com/mo-jan/traffic-flows/blob/master/plots/zh_covid19_mobility.html">here</a>.
+Download an interactive html graph <a id="raw-url" href="https://github.com/mo-jan/traffic-flows/blob/master/plots/zh_covid19_mobility.html">here</a>.
