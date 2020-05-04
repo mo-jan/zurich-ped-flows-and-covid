@@ -15,8 +15,9 @@ import matplotlib.pyplot as plt
 pio.templates.default = "plotly_white"
 
 
-def plotly_graph(df, x_cname, y_cnames, file_name, plot_path):
-    """Stepped line chart for one or more lines
+def plotly_graph(df, x_cname, y_cnames, file_name, save_path):
+    """
+    Stepped line chart for one or more lines
 
     :param df: data for x-axis and all y-axis data in separate columns
     :type df: pd.DataFrame
@@ -26,8 +27,8 @@ def plotly_graph(df, x_cname, y_cnames, file_name, plot_path):
     :type y_cnames: [type]
     :param file_name: [description]
     :type file_name: [type]
-    :param plot_path: path to directory for exporting html plot
-    :type plot_path: pathlib.Path object 
+    :param save_path: path to directory for exporting html plot
+    :type save_path: pathlib.Path object 
     """
 
     x = df[x_cname]
@@ -52,12 +53,13 @@ def plotly_graph(df, x_cname, y_cnames, file_name, plot_path):
 
     fig.show()
 
-    (plot_path).mkdir(parents=True, exist_ok=True)
-    fig.write_html(str(plot_path / f"{file_name}.html"))
+    (save_path).mkdir(parents=True, exist_ok=True)
+    fig.write_html(str(save_path / f"{file_name}.html"))
 
 
-def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
-    """Stepped line chart plot from two time series with
+def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, save_path):
+    """
+    Stepped line chart plot from two time series with
     dual y-axes
 
     :param df: dataframe containing columns for x and both y axes data
@@ -68,8 +70,8 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
     :type y1_name: string
     :param y2_name: name of df column with second y-axis data
     :type y2_name: string
-    :param plot_path: path to directory for exporting html plot
-    :type plot_path: pathlib.Path object 
+    :param save_path: path to directory for exporting html plot
+    :type save_path: pathlib.Path object 
     """
     # create traces
     fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -152,14 +154,15 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
 
     fig.show(config=config,)
 
-    (plot_path).mkdir(parents=True, exist_ok=True)
-    fig.write_html(str(plot_path / f"plot_{y1_name}_vs_{y2_name}.html"))
+    (save_path).mkdir(parents=True, exist_ok=True)
+    fig.write_html(str(save_path / f"plot_{y1_name}_vs_{y2_name}.html"))
 
 
 def multi_yaxis_plot(
-    df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, plot_path,
+    df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, save_path,
 ):
-    """Stepped line chart plot with 3 y-axes.
+    """
+    Stepped line chart plot with 3 y-axes.
 
     :param df1: data for line 1 x and y
     :type df1: pd.DataFrame
@@ -183,8 +186,8 @@ def multi_yaxis_plot(
     :type plot_name: string
     :param filename: html file name
     :type filename: string
-    :param plot_path: path to directory for exporting html plot
-    :type plot_path: pathlib.Path object
+    :param save_path: path to directory for exporting html plot
+    :type save_path: pathlib.Path object
     """
 
     # create traces
@@ -316,12 +319,33 @@ def multi_yaxis_plot(
 
     fig.show(config=config,)
 
-    (plot_path).mkdir(parents=True, exist_ok=True)
-    fig.write_html(str(plot_path / f"{filename}.html"))
+    (save_path).mkdir(parents=True, exist_ok=True)
+    fig.write_html(str(save_path / f"{filename}.html"))
 
 
-def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
-    
+def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, save_path):
+    """
+    Static, stepped line chart with dual axis. 
+
+    :param df1: data for line 1 x and y
+    :type df1: pd.DataFrame
+    :param x1: name of df column with line 1 x-axis data
+    :type x1: string
+    :param y1: name of df column with line 1 y-axis data
+    :type y1: string
+    :param df2: data for line 2 x and y
+    :type df2: pd.DataFrame
+    :param x2: name of df column with line 2 x-axis data
+    :type x2: string
+    :param y2: name of df column with line 2 y-axis data
+    :type y2: string
+    :param plot_name: plot name i.e. plot title
+    :type plot_name: string
+    :param filename: html file name
+    :type filename: string
+    :param save_path: path to directory for exporting html plot
+    :type save_path: pathlib.Path object
+    """    
     fig, ax1 = plt.subplots(figsize=(20, 8))
 
     color = 'black'
@@ -337,4 +361,5 @@ def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
     ax2.plot(df2[x2], df2[y2], color=color, drawstyle="steps")
     ax2.tick_params(labelcolor=color)
     
-    plt.savefig(str(str(plot_path / f"{filename}.png")))
+    (save_path).mkdir(parents=True, exist_ok=True)
+    plt.savefig(str(str(save_path / f"{filename}.png")))
