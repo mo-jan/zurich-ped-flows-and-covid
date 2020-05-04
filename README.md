@@ -10,4 +10,4 @@ Here is a very simple static plot.
 
 ![Graph](/plots/zh_covid19_mobility_static.png)
 
-Download an interactive html graph <a id="raw-url" href="https://github.com/mo-jan/traffic-flows/blob/master/plots/zh_covid19_mobility.html">here</a>.
+Download an interactive html graph <a id="raw-url" href="https://github.com/mo-jan/traffic-flows/blob/master/plots/zh_covid19_mobility.html" download>here</a>.
