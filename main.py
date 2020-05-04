@@ -26,13 +26,14 @@ pio.templates.default = "plotly_white"
 
 def main():
     # variables
-    save_path = Path("plots/")
+    plot_path = Path("plots/")
+    data_path = Path("data/processed/")
 
     # DATA A) covid zürich data
     url_cov_zh = "https://raw.githubusercontent.com/openZH/covid_19/master/fallzahlen_kanton_alter_geschlecht_csv/COVID19_Fallzahlen_Kanton_ZH_alter_geschlecht.csv"
     cov_zh = dc.cov_zh_get_data(url_cov_zh)
     plot_data = dc.cov_zh_prep_plot_data(cov_zh, "D")
-    # plotly_graph_dual_axis(plot_data, "Date", "NewConfCases", "NewDeaths", save_path)
+    # plotly_graph_dual_axis(plot_data, "Date", "NewConfCases", "NewDeaths", plot_path)
 
     # DATA B) zurich 'party barometer' zurich hardbruecke station
     ckan_url = "https://data.stadt-zuerich.ch/api/3/action/datastore_search?resource_id=5baeaf58-9af2-4a39-a357-9063ca450893"
@@ -41,7 +42,7 @@ def main():
     hardbr_df_eastnorth = dc.ckan_prep_plot_data(
         hardbr_df, "Name", "Ost-Nord total", "Timestamp", "D"
     )
-    # plotly_graph(hardbr_df_eastnorth, "datetime", ["pedestrians_hardbruecke_northeast"], "zh_hardbr", save_path)
+    # plotly_graph(hardbr_df_eastnorth, "datetime", ["pedestrians_hardbruecke_northeast"], "zh_hardbr", plot_path)
 
     # COMBINED interactive graph
     multi_yaxis_plot(
@@ -56,7 +57,7 @@ def main():
         "pedestrians_hardbruecke_northeast",
         "Zürich Covid19 data & Zürich Hardbrücke mobility trends",
         "zh_covid19_mobility",
-        save_path,
+        plot_path,
     )
 
     # COMBINED static graph for display in notebook and markdown file
@@ -68,8 +69,14 @@ def main():
         "Date",
         "NewDeaths",
         "zh_covid19_mobility_static",
-        save_path,
+        plot_path,
     )
+
+    # Store data to csv files
+    (data_path).mkdir(parents=True, exist_ok=True)
+    today = dt.date.today().strftime("%Y-%m-%d")
+    hardbr_df.to_csv(data_path / f"{today}_data_hardbr.csv")
+    plot_data.to_csv(data_path / f"{today}_cov_zh.csv")
 
 
 if __name__ == "__main__":

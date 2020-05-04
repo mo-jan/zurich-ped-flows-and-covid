@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 pio.templates.default = "plotly_white"
 
 
-def plotly_graph(df, x_cname, y_cnames, file_name, save_path):
+def plotly_graph(df, x_cname, y_cnames, file_name, plot_path):
     """
     Stepped line chart for one or more lines
 
@@ -27,8 +27,8 @@ def plotly_graph(df, x_cname, y_cnames, file_name, save_path):
     :type y_cnames: [type]
     :param file_name: [description]
     :type file_name: [type]
-    :param save_path: path to directory for exporting html plot
-    :type save_path: pathlib.Path object 
+    :param plot_path: path to directory for exporting html plot
+    :type plot_path: pathlib.Path object 
     """
 
     x = df[x_cname]
@@ -53,11 +53,11 @@ def plotly_graph(df, x_cname, y_cnames, file_name, save_path):
 
     fig.show()
 
-    (save_path).mkdir(parents=True, exist_ok=True)
-    fig.write_html(str(save_path / f"{file_name}.html"))
+    (plot_path).mkdir(parents=True, exist_ok=True)
+    fig.write_html(str(plot_path / f"{file_name}.html"))
 
 
-def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, save_path):
+def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, plot_path):
     """
     Stepped line chart plot from two time series with
     dual y-axes
@@ -70,8 +70,8 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, save_path):
     :type y1_name: string
     :param y2_name: name of df column with second y-axis data
     :type y2_name: string
-    :param save_path: path to directory for exporting html plot
-    :type save_path: pathlib.Path object 
+    :param plot_path: path to directory for exporting html plot
+    :type plot_path: pathlib.Path object 
     """
     # create traces
     fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -154,12 +154,12 @@ def plotly_graph_dual_axis(df, x_name, y1_name, y2_name, save_path):
 
     fig.show(config=config,)
 
-    (save_path).mkdir(parents=True, exist_ok=True)
-    fig.write_html(str(save_path / f"plot_{y1_name}_vs_{y2_name}.html"))
+    (plot_path).mkdir(parents=True, exist_ok=True)
+    fig.write_html(str(plot_path / f"plot_{y1_name}_vs_{y2_name}.html"))
 
 
 def multi_yaxis_plot(
-    df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, save_path,
+    df1, x1, y1, df2, x2, y2, df3, x3, y3, plot_name, filename, plot_path,
 ):
     """
     Stepped line chart plot with 3 y-axes.
@@ -186,8 +186,8 @@ def multi_yaxis_plot(
     :type plot_name: string
     :param filename: html file name
     :type filename: string
-    :param save_path: path to directory for exporting html plot
-    :type save_path: pathlib.Path object
+    :param plot_path: path to directory for exporting html plot
+    :type plot_path: pathlib.Path object
     """
 
     # create traces
@@ -319,13 +319,13 @@ def multi_yaxis_plot(
 
     fig.show(config=config,)
 
-    (save_path).mkdir(parents=True, exist_ok=True)
+    (plot_path).mkdir(parents=True, exist_ok=True)
     today = dt.date.today().strftime("%Y-%m-%d")
-    fig.write_html(str(save_path / f"{today}_{filename}.html"))
-    fig.write_html(str(save_path / f"{filename}.html"))
+    fig.write_html(str(plot_path / f"{today}_{filename}.html"))
+    fig.write_html(str(plot_path / f"{filename}.html"))
 
 
-def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, save_path):
+def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
     """
     Static, stepped line chart with dual axis. 
 
@@ -345,8 +345,8 @@ def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, save_path):
     :type plot_name: string
     :param filename: html file name
     :type filename: string
-    :param save_path: path to directory for exporting html plot
-    :type save_path: pathlib.Path object
+    :param plot_path: path to directory for exporting html plot
+    :type plot_path: pathlib.Path object
     """    
     fig, ax1 = plt.subplots(figsize=(20, 8))
 
@@ -363,7 +363,7 @@ def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, save_path):
     ax2.plot(df2[x2], df2[y2], color=color, drawstyle="steps")
     ax2.tick_params(labelcolor=color)
     
-    (save_path).mkdir(parents=True, exist_ok=True)
+    (plot_path).mkdir(parents=True, exist_ok=True)
     today = dt.date.today().strftime("%Y-%m-%d")
-    plt.savefig(str(str(save_path / f"{today}_{filename}.png")))
-    plt.savefig(str(str(save_path / f"{filename}.png")))
+    plt.savefig(str(str(plot_path / f"{today}_{filename}.png")))
+    plt.savefig(str(str(plot_path / f"{filename}.png")))
