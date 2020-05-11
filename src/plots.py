@@ -202,7 +202,7 @@ def multi_yaxis_plot(
             mode="lines+markers",
             # line_color="lightgrey",
             showlegend=True,
-            name=y2,
+            name=y1,
             line=dict(
                 width=2, shape="hv",
             ),  # [‘linear’, ‘spline’, ‘hv’, ‘vh’, ‘hvh’, ‘vhv’]
