@@ -327,7 +327,7 @@ def multi_yaxis_plot(
 
     screenshot_path = Path("img/screenshot.png")
     with open(screenshot_path, "wb") as f:
-        f.write(scope.transform(fig, format="png", width=2000, heigth=600))
+        f.write(scope.transform(fig, format="png", width=2000, height=600))
 
 
 def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
