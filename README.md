@@ -10,11 +10,6 @@ We assume Hardbrücke's northeastern exit is a suitable "barometer" for Zürich'
 
 ## Static graph
 
-See below a simple static graph, which is updated 3 times a week:
+The below static graph is updated 3 times a week. Download the interactive html graph <a id="raw-url" href="https://github.com/mo-jan/traffic-flows/blob/master/plots/zh_covid19_mobility.html" download>here</a>.
 
-![Graph](/plots/zh_covid19_mobility_static.png)
-
-## Interactive graph
-Download an interactive html graph <a id="raw-url" href="https://github.com/mo-jan/traffic-flows/blob/master/plots/zh_covid19_mobility.html" download>here</a>. In addition to death cases it includes new confirmed Covid-19 infection cases.
-
-![GRAPH](/img/screenshot.png)
+![Screenshot](/img/screenshot.png)
