@@ -318,7 +318,6 @@ def multi_yaxis_plot(
     )
 
     fig.show(config=config,)
-    fig.write_image("test.png")
 
     (plot_path).mkdir(parents=True, exist_ok=True)
     today = dt.date.today().strftime("%Y-%m-%d")
