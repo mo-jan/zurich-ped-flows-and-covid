@@ -60,17 +60,17 @@ def main():
         plot_path,
     )
 
-    # COMBINED static graph for display in notebook and markdown file
-    static_dual_axis_plot(
-        hardbr_df_eastnorth,
-        "datetime",
-        "pedestrians_hardbruecke_northeast",
-        plot_data,
-        "Date",
-        "NewDeaths",
-        "zh_covid19_mobility_static",
-        plot_path,
-    )
+    # # COMBINED static graph for display in notebook and markdown file
+    # static_dual_axis_plot(
+    #     hardbr_df_eastnorth,
+    #     "datetime",
+    #     "pedestrians_hardbruecke_northeast",
+    #     plot_data,
+    #     "Date",
+    #     "NewDeaths",
+    #     "zh_covid19_mobility_static",
+    #     plot_path,
+    # )
 
     # Store data to csv files
     (data_path).mkdir(parents=True, exist_ok=True)

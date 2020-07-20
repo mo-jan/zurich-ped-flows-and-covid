@@ -10,8 +10,10 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
+from kaleido.scopes.plotly import PlotlyScope
 import matplotlib.pyplot as plt
 
+scope = PlotlyScope()
 pio.templates.default = "plotly_white"
 
 
@@ -322,7 +324,10 @@ def multi_yaxis_plot(
     (plot_path).mkdir(parents=True, exist_ok=True)
     today = dt.date.today().strftime("%Y-%m-%d")
     fig.write_html(str(plot_path / f"{filename}.html"))
-    fig.write_image(Path("img/screenshot.png"))
+
+    screenshot_path = Path("img/screenshot.png")
+    with open(screenshot_path, "wb") as f:
+        f.write(scope.transform(fig, format="png"))
 
 
 def static_dual_axis_plot(df1, x1, y1, df2, x2, y2, filename, plot_path):
